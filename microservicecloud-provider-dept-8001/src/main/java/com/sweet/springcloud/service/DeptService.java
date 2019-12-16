@@ -6,9 +6,9 @@ import com.sweet.springcloud.pojo.Dept;
 
 public interface DeptService {
 	
-	public boolean addDept(Dept dept);
+	boolean addDept(Dept dept);
 
-	public Dept findById(Integer deptno);
+	Dept findById(Integer deptno);
 
-	public List<Dept> findAll();
+	List<Dept> findAll();
 }

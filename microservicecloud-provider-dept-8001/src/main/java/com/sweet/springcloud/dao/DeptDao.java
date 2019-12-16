@@ -10,9 +10,9 @@ import com.sweet.springcloud.pojo.Dept;
 @Mapper
 public interface DeptDao {
 
-	public boolean addDept(Dept dept);
+	boolean addDept(Dept dept);
 	
-	public Dept findById(Integer deptno);
-	
-	public List<Dept> findAll();
+	Dept findById(Integer deptno);
+
+	List<Dept> findAll();
 }
