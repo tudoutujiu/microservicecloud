@@ -1,8 +1,8 @@
 package com.sweet.springcloud.service;
 
-import java.util.List;
-
 import com.sweet.springcloud.pojo.Dept;
+
+import java.util.List;
 
 public interface DeptService {
 	

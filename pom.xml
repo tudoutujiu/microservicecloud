@@ -105,6 +105,10 @@
         <module>microservicecloud-eureka-7001</module>
         <module>mircoservicecloud-eureka-7002</module>
         <module>microservicecloud-eureka-7003</module>
+        <module>microservicecloud-provide-dept-8002</module>
+        <module>microservicecloud-provide-dept-8003</module>
+        <module>microservicecloud-consumer-dept-feign</module>
+        <module>mircoservicecloud-provider-dept-hystrix-8001</module>
 
     </modules>
 

@@ -1,18 +1,14 @@
 package com.sweet.springcloud.controller;
 
-import java.util.List;
-
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.sweet.springcloud.pojo.Dept;
 import com.sweet.springcloud.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.sweet.springcloud.pojo.Dept;
+import java.util.List;
 
 @RestController
 public class DeptController {
@@ -29,10 +25,20 @@ public class DeptController {
 	}
 	
 	@RequestMapping(value = "/dept/get/{deptno}",method = RequestMethod.GET)
+	@HystrixCommand(fallbackMethod = "processHystrix_Get")
 	public Dept findById(@PathVariable("deptno")Integer deptno ) {
-		return deptService.get(deptno);
+		Dept dept = this.deptService.get(deptno);
+		if(dept==null){
+			throw new RuntimeException("没有该Id"+deptno+"所对应的信息");
+		}
+		return dept;
 	}
-	
+
+	public Dept processHystrix_Get(@PathVariable("deptno")Integer deptno){
+		return new Dept().setDeptno(deptno).setDname("没有该Id"+deptno+"所对应的信息,null--@HystrixCommand")
+				.setDb_source("No this databases in MySQL");
+	}
+
 	@RequestMapping(value = "/dept/list",method = RequestMethod.GET)
 	public List<Dept> list() {
 		return deptService.list();
