@@ -1,6 +1,3 @@
 spring:
   application:
-    name: mircoservicecloud-config-eureka-client
-  client:
-    register-with-eureka: false     # false表示不向注册中心注册自己
-    fetch-registry: false
+    name: microservicecloud-config-eureka-client
